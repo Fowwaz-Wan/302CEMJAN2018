@@ -1,0 +1,133 @@
+﻿@model ClassReplacementSystem.Models.user
+
+@{
+    Layout = null;
+}
+<style>
+    .foo input {
+        height: 31px;
+    }
+
+    .ui-datepicker {
+        background: #dadfe8;
+        border: 1px solid #555;
+        color: #232323;
+    }
+</style>
+
+<h2>Sign Up</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+  
+
+        @Html.ValidationSummary()
+    <table>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.userid, "User ID", new { @class = "control-label", @style = "color:red" })
+                @Html.TextBoxFor(model => model.userid, new { @class = "form-control", @style = "max-width:100%;margin-left:43px" })
+                
+            </th>
+         
+            <th>
+                @Html.LabelFor(model => model.password, "Password", new { @class = "control-label", @style = "color:red;margin-left:30px" })
+                @Html.PasswordFor(model => model.password, new { @class = "form-control", @style = "max-width:100%;margin-left:28px"})
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger blink_text" })
+
+            </th>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.first, "First Name", new { @class = "control-label", @style = "color:Black" })
+                @Html.TextBoxFor(model => model.first, new { @class = "form-control", @style = "max-width:100%;margin-left:20px" })
+                @Html.ValidationMessageFor(model => model.first, "", new { @class = "text-danger blink_text" })
+            </th>
+
+            <th>
+                @Html.LabelFor(model => model.last,"Last Name", new { @class = "control-label", @style = "color:Black;margin-left:30px" })
+                @Html.TextBoxFor(model => model.last, new { @class = "form-control", @style = "max-width:100%;margin-left:20px" })
+                @Html.ValidationMessageFor(model => model.last, "", new { @class = "text-danger blink_text" })
+             </th>
+        </tr>
+    </table>
+
+    <table>
+
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.address, "Address", new { @class = "control-label", @style = "color:Black" })
+                @Html.TextBoxFor(model => model.address, new { @class = "form-control", @style = "width:1000px;margin-left:41px" })
+                @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger blink_text" })
+            </th>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.gender, "Gender", new { @class = "control-label", @style = "color:Black" })
+                @Html.DropDownList("Gender", new List<SelectListItem>() { new SelectListItem { Text = "Male", Value = "Male" }
+                      , new SelectListItem { Text = "Female", Value = "Female" } }, htmlAttributes: new
+                      {
+                          @class = "form-control"
+                       ,
+                          @style = "margin-left:44px;height:31px;width:80px"
+                      })
+                @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger blink_text" })
+            </th>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.Email, "E-mail", new { @class = "control-label", @style = "color:Black" })
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @style = "width:1000px;margin-left:47px" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger blink_text" })
+            </th>
+        </tr>
+
+    </table>
+
+    <table>
+        <tr>
+            <th>
+                @Html.LabelFor(model => model.Birthday, "Date Of Birth", new { @class = "control-label", @style = "color:Black" })
+                @Html.TextBoxFor(model => model.Birthday)
+                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger blink_text" })
+
+            </th>
+        </tr>
+    </table>
+
+        <table>
+            <tr>
+                <th>
+                    @Html.LabelFor(model => model.accesstype, "Access Type", new { @class = "control-label", @style = "color:Black" })
+                    @Html.TextBoxFor(model => model.accesstype, new { @class = "form-control", @style = "max-width:100%;margin-left:12px" })
+                    @Html.ValidationMessageFor(model => model.accesstype, "", new { @class = "text-danger blink_text" })
+                </th>
+
+                <th>
+                    @Html.LabelFor(model => model.telno, "Telephone No.", new { @class = "control-label", @style = "color:Black;margin-left:25"})
+                    @Html.TextBoxFor(model => model.telno, new { @class = "form-control", @style = "max-width:100%;margin-left:6px" })
+                    @Html.ValidationMessageFor(model => model.telno, "", new { @class = "text-danger blink_text" })
+                </th>
+            </tr>
+
+    </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" style="background-color: #4CAF50; color: white; font-size: 16px; padding: 15px 25px; cursor: pointer; " />
+            </div>
+        </div>
+   
+}
+
+
