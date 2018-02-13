@@ -73,29 +73,29 @@ namespace StandardPgm.Controllers
             ViewBag.VMainMenuPic = db.C_Menu.Where(x => x.MenuSeq == "000").Select(x => x.MenuPic).FirstOrDefault();
             ViewBag.VStatus = db.C_Menu.Where(x => x.MenuSeq == "000").Select(x => x.Status).FirstOrDefault();
 
-            ViewBag.VMenuName1 = db.C_Menu.Where(x => x.MenuSeq == "001").Select(x => x.MenuName).FirstOrDefault();
-            ViewBag.VStatus1 = db.C_Menu.Where(x => x.MenuSeq == "001").Select(x => x.Status).FirstOrDefault();
-            ViewBag.VColor1 = db.C_Menu.Where(x => x.MenuSeq == "001").Select(x => x.IconBckgrdColor).FirstOrDefault();
-            ViewBag.VLogo1 = db.C_Menu.Where(x => x.MenuSeq == "001").Select(x => x.IconLogo).FirstOrDefault();
-            ViewBag.VMenuController1 = db.C_Menu.Where(x => x.MenuSeq == "001").Select(x => x.MenuController).FirstOrDefault();
+            //ViewBag.VMenuName1 = db.C_Menu.Where(x => x.MenuSeq == "001").Select(x => x.MenuName).FirstOrDefault();
+            //ViewBag.VStatus1 = db.C_Menu.Where(x => x.MenuSeq == "001").Select(x => x.Status).FirstOrDefault();
+            //ViewBag.VColor1 = db.C_Menu.Where(x => x.MenuSeq == "001").Select(x => x.IconBckgrdColor).FirstOrDefault();
+            //ViewBag.VLogo1 = db.C_Menu.Where(x => x.MenuSeq == "001").Select(x => x.IconLogo).FirstOrDefault();
+            //ViewBag.VMenuController1 = db.C_Menu.Where(x => x.MenuSeq == "001").Select(x => x.MenuController).FirstOrDefault();
 
-            ViewBag.VMenuName2 = db.C_Menu.Where(x => x.MenuSeq == "002").Select(x => x.MenuName).FirstOrDefault();
-            ViewBag.VStatus2 = db.C_Menu.Where(x => x.MenuSeq == "002").Select(x => x.Status).FirstOrDefault();
-            ViewBag.VColor2 = db.C_Menu.Where(x => x.MenuSeq == "002").Select(x => x.IconBckgrdColor).FirstOrDefault();
-            ViewBag.VLogo2 = db.C_Menu.Where(x => x.MenuSeq == "002").Select(x => x.IconLogo).FirstOrDefault();
-            ViewBag.VMenuController2 = db.C_Menu.Where(x => x.MenuSeq == "002").Select(x => x.MenuController).FirstOrDefault();
+            //ViewBag.VMenuName2 = db.C_Menu.Where(x => x.MenuSeq == "002").Select(x => x.MenuName).FirstOrDefault();
+            //ViewBag.VStatus2 = db.C_Menu.Where(x => x.MenuSeq == "002").Select(x => x.Status).FirstOrDefault();
+            //ViewBag.VColor2 = db.C_Menu.Where(x => x.MenuSeq == "002").Select(x => x.IconBckgrdColor).FirstOrDefault();
+            //ViewBag.VLogo2 = db.C_Menu.Where(x => x.MenuSeq == "002").Select(x => x.IconLogo).FirstOrDefault();
+            //ViewBag.VMenuController2 = db.C_Menu.Where(x => x.MenuSeq == "002").Select(x => x.MenuController).FirstOrDefault();
 
-            ViewBag.VMenuName3 = db.C_Menu.Where(x => x.MenuSeq == "003").Select(x => x.MenuName).FirstOrDefault();
-            ViewBag.VStatus3 = db.C_Menu.Where(x => x.MenuSeq == "003").Select(x => x.Status).FirstOrDefault();
-            ViewBag.VColor3 = db.C_Menu.Where(x => x.MenuSeq == "003").Select(x => x.IconBckgrdColor).FirstOrDefault();
-            ViewBag.VLogo3 = db.C_Menu.Where(x => x.MenuSeq == "003").Select(x => x.IconLogo).FirstOrDefault();
-            ViewBag.VMenuController3 = db.C_Menu.Where(x => x.MenuSeq == "003").Select(x => x.MenuController).FirstOrDefault();
+            //ViewBag.VMenuName3 = db.C_Menu.Where(x => x.MenuSeq == "003").Select(x => x.MenuName).FirstOrDefault();
+            //ViewBag.VStatus3 = db.C_Menu.Where(x => x.MenuSeq == "003").Select(x => x.Status).FirstOrDefault();
+            //ViewBag.VColor3 = db.C_Menu.Where(x => x.MenuSeq == "003").Select(x => x.IconBckgrdColor).FirstOrDefault();
+            //ViewBag.VLogo3 = db.C_Menu.Where(x => x.MenuSeq == "003").Select(x => x.IconLogo).FirstOrDefault();
+            //ViewBag.VMenuController3 = db.C_Menu.Where(x => x.MenuSeq == "003").Select(x => x.MenuController).FirstOrDefault();
 
-            ViewBag.VMenuName4 = db.C_Menu.Where(x => x.MenuSeq == "004").Select(x => x.MenuName).FirstOrDefault();
-            ViewBag.VStatus4 = db.C_Menu.Where(x => x.MenuSeq == "004").Select(x => x.Status).FirstOrDefault();
-            ViewBag.VColor4 = db.C_Menu.Where(x => x.MenuSeq == "004").Select(x => x.IconBckgrdColor).FirstOrDefault();
-            ViewBag.VLogo4 = db.C_Menu.Where(x => x.MenuSeq == "004").Select(x => x.IconLogo).FirstOrDefault();
-            ViewBag.VMenuController4 = db.C_Menu.Where(x => x.MenuSeq == "004").Select(x => x.MenuController).FirstOrDefault();
+            //ViewBag.VMenuName4 = db.C_Menu.Where(x => x.MenuSeq == "004").Select(x => x.MenuName).FirstOrDefault();
+            //ViewBag.VStatus4 = db.C_Menu.Where(x => x.MenuSeq == "004").Select(x => x.Status).FirstOrDefault();
+            //ViewBag.VColor4 = db.C_Menu.Where(x => x.MenuSeq == "004").Select(x => x.IconBckgrdColor).FirstOrDefault();
+            //ViewBag.VLogo4 = db.C_Menu.Where(x => x.MenuSeq == "004").Select(x => x.IconLogo).FirstOrDefault();
+            //ViewBag.VMenuController4 = db.C_Menu.Where(x => x.MenuSeq == "004").Select(x => x.MenuController).FirstOrDefault();
 
             ViewBag.VMenuName5 = db.C_Menu.Where(x => x.MenuSeq == "005").Select(x => x.MenuName).FirstOrDefault();
             ViewBag.VStatus5 = db.C_Menu.Where(x => x.MenuSeq == "005").Select(x => x.Status).FirstOrDefault();
@@ -115,23 +115,23 @@ namespace StandardPgm.Controllers
             ViewBag.VLogo7 = db.C_Menu.Where(x => x.MenuSeq == "007").Select(x => x.IconLogo).FirstOrDefault();
             ViewBag.VMenuController7 = db.C_Menu.Where(x => x.MenuSeq == "007").Select(x => x.MenuController).FirstOrDefault();
 
-            ViewBag.VMenuName8 = db.C_Menu.Where(x => x.MenuSeq == "008").Select(x => x.MenuName).FirstOrDefault();
-            ViewBag.VStatus8 = db.C_Menu.Where(x => x.MenuSeq == "008").Select(x => x.Status).FirstOrDefault();
-            ViewBag.VColor8 = db.C_Menu.Where(x => x.MenuSeq == "008").Select(x => x.IconBckgrdColor).FirstOrDefault();
-            ViewBag.VLogo8 = db.C_Menu.Where(x => x.MenuSeq == "008").Select(x => x.IconLogo).FirstOrDefault();
-            ViewBag.VMenuController8 = db.C_Menu.Where(x => x.MenuSeq == "008").Select(x => x.MenuController).FirstOrDefault();
+            //ViewBag.VMenuName8 = db.C_Menu.Where(x => x.MenuSeq == "008").Select(x => x.MenuName).FirstOrDefault();
+            //ViewBag.VStatus8 = db.C_Menu.Where(x => x.MenuSeq == "008").Select(x => x.Status).FirstOrDefault();
+            //ViewBag.VColor8 = db.C_Menu.Where(x => x.MenuSeq == "008").Select(x => x.IconBckgrdColor).FirstOrDefault();
+            //ViewBag.VLogo8 = db.C_Menu.Where(x => x.MenuSeq == "008").Select(x => x.IconLogo).FirstOrDefault();
+            //ViewBag.VMenuController8 = db.C_Menu.Where(x => x.MenuSeq == "008").Select(x => x.MenuController).FirstOrDefault();
 
-            ViewBag.VStatus9 = db.C_Menu.Where(x => x.MenuSeq == "009").Select(x => x.Status).FirstOrDefault();
-            ViewBag.VMenuName9 = db.C_Menu.Where(x => x.MenuSeq == "009").Select(x => x.MenuName).FirstOrDefault();
-            ViewBag.VColor9 = db.C_Menu.Where(x => x.MenuSeq == "009").Select(x => x.IconBckgrdColor).FirstOrDefault();
-            ViewBag.VLogo9 = db.C_Menu.Where(x => x.MenuSeq == "009").Select(x => x.IconLogo).FirstOrDefault();
-            ViewBag.VMenuController9 = db.C_Menu.Where(x => x.MenuSeq == "009").Select(x => x.MenuController).FirstOrDefault();
+            //ViewBag.VStatus9 = db.C_Menu.Where(x => x.MenuSeq == "009").Select(x => x.Status).FirstOrDefault();
+            //ViewBag.VMenuName9 = db.C_Menu.Where(x => x.MenuSeq == "009").Select(x => x.MenuName).FirstOrDefault();
+            //ViewBag.VColor9 = db.C_Menu.Where(x => x.MenuSeq == "009").Select(x => x.IconBckgrdColor).FirstOrDefault();
+            //ViewBag.VLogo9 = db.C_Menu.Where(x => x.MenuSeq == "009").Select(x => x.IconLogo).FirstOrDefault();
+            //ViewBag.VMenuController9 = db.C_Menu.Where(x => x.MenuSeq == "009").Select(x => x.MenuController).FirstOrDefault();
 
-            ViewBag.VStatus10 = db.C_Menu.Where(x => x.MenuSeq == "010").Select(x => x.Status).FirstOrDefault();
-            ViewBag.VMenuName10 = db.C_Menu.Where(x => x.MenuSeq == "010").Select(x => x.MenuName).FirstOrDefault();
-            ViewBag.VColor10 = db.C_Menu.Where(x => x.MenuSeq == "010").Select(x => x.IconBckgrdColor).FirstOrDefault();
-            ViewBag.VLogo10 = db.C_Menu.Where(x => x.MenuSeq == "010").Select(x => x.IconLogo).FirstOrDefault();
-            ViewBag.VMenuController10 = db.C_Menu.Where(x => x.MenuSeq == "010").Select(x => x.MenuController).FirstOrDefault();
+            //ViewBag.VStatus10 = db.C_Menu.Where(x => x.MenuSeq == "010").Select(x => x.Status).FirstOrDefault();
+            //ViewBag.VMenuName10 = db.C_Menu.Where(x => x.MenuSeq == "010").Select(x => x.MenuName).FirstOrDefault();
+            //ViewBag.VColor10 = db.C_Menu.Where(x => x.MenuSeq == "010").Select(x => x.IconBckgrdColor).FirstOrDefault();
+            //ViewBag.VLogo10 = db.C_Menu.Where(x => x.MenuSeq == "010").Select(x => x.IconLogo).FirstOrDefault();
+            //ViewBag.VMenuController10 = db.C_Menu.Where(x => x.MenuSeq == "010").Select(x => x.MenuController).FirstOrDefault();
 
             return View();
 

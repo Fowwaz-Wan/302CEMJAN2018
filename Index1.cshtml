@@ -1,0 +1,423 @@
+﻿@*@using SGMSPC.App.Models
+@model clsGroupSecurity*@
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<style>   
+
+    .tile {
+        cursor: pointer;
+    }
+
+    .dynamicTile .col-sm-2.col-xs-4 {
+        padding: 5px;
+    }
+
+    .bigicon {
+        font-size: 67px;
+        color: white;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    a.icontext:visited{
+        color:white;
+    }
+
+    .icontext {
+       
+        color: white;
+        font-size: 27px;
+    }
+
+    .bigicondark {
+        font-size: 67px;
+        color: black;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .icontextdark {
+        color: black;
+        font-size: 27px;
+    }
+
+    .dynamicTile .col-sm-4.col-xs-8 {
+        padding: 5px;
+    }   
+
+    #tile_1 {
+        background: @ViewBag.VColor1;
+    }
+
+    #tile_2 {
+        background: @ViewBag.VColor2;
+    }   
+
+    #tile_3 {
+        background: @ViewBag.VColor6;
+    }
+
+    #tile_4 {
+        background: @ViewBag.VColor4;
+    }
+
+    #tile_5 {
+        background: @ViewBag.VColor3;
+    }
+
+    #tile_6 {
+        background: @ViewBag.VColor5;
+    }
+
+     #tile_7 {
+        background:  @ViewBag.VColor7;
+    }
+
+     #tile_8 {
+        background:  @ViewBag.VColor8;
+    }
+
+      #tile_9 {
+        background:  @ViewBag.VColor9;
+    }
+
+     #tile_10 {
+        background:  @ViewBag.VColor10;
+    }
+    
+
+    .tilecaption {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        margin: 0 !important;
+        text-align: center;
+        color: white;
+        font-family: Segoe UI;
+        font-weight: lighter;
+    }
+</style>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $(".tile").height($("#tile1").width());
+    $(".carousel").height($("#tile1").width());
+    $(".item").height($("#tile1").width());
+
+    $(window).resize(function () {
+        if (this.resizeTO) clearTimeout(this.resizeTO);
+        this.resizeTO = setTimeout(function () {
+            $(this).trigger('resizeEnd');
+        }, 10);
+    });
+
+    $(window).bind('resizeEnd', function () {
+        $(".tile").height($("#tile1").width());
+        $(".carousel").height($("#tile1").width());
+        $(".item").height($("#tile1").width());
+    });
+});
+</script>
+    
+    @* Menu - Main Menu  MenuSeq - 000*@
+    <div class="container dynamicTile" style="margin-top:55px;">
+        <div class="row">
+          @if (ViewBag.VMainMenuPic != null && ViewBag.VMainMenuPic != "" && ViewBag.VStatus == "inActive")
+          {
+            <div class="col-sm-4 col-xs-8">
+                <div id="tile_logo" class="tile">
+                    <div class="carousel slide" data-ride="carousel" style="cursor:default;">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="@ViewBag.VMainMenuPic" class="img-responsive img-rounded" style="width:100%" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          }
+          
+          
+                @* Menu - Transaction Menu  MenuSeq - 001*@
+                @if (ViewBag.VMenuName1 != null && ViewBag.VMenuName1 != "" && ViewBag.VStatus1 == "Active")
+                {
+                    <div class="col-sm-4 col-xs-8">
+                        <div id="tile_1" class="tile" style="">
+                            <div class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="item active text-center">
+                                        <div>
+                                            @*<span class="fa fa-exchange bigicon"></span>*@
+                                            <span class="@ViewBag.VLogo1"></span>
+                                        </div>
+                                        <div class="icontext">
+                                            @*@Html.ActionLink("Transaction", "Transaction", "Home", new Dictionary<string, object> { { "class", "form-control" }, { "style", "color:white;" } })*@
+                                            <a href="/Home/SMT" class="icontext">@ViewBag.VMenuName1</a>
+                                            @*@Html.ActionLink("Transaction", "Transaction", "Home")*@
+                                        </div>
+                                        <div class="icontext">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @* Menu - Enquiry Menu  MenuSeq - 002*@
+                @if (ViewBag.VMenuName2 != null && ViewBag.VMenuName2 != "" && ViewBag.VStatus2 == "Active")
+                {
+                    <div class="col-sm-2 col-xs-4">
+                        <div id="tile_2" class="tile">
+                            <div class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="item active text-center">
+                                        <div>
+                                            <span class="@ViewBag.VLogo2"></span>
+                                        </div>
+                                        <div class="icontext">
+                                            <a href="/Home/BackEnd" class="icontext">@ViewBag.VMenuName2</a>
+                                        </div>
+                                        <div class="icontext">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+
+
+                @* Menu - Maintenance Menu  MenuSeq - 003*@
+                @if (ViewBag.VMenuName3 != null && ViewBag.VMenuName3 != "" && ViewBag.VStatus3 == "Active")
+                {
+                    <div class="col-sm-2 col-xs-4">
+                        <div id="tile_3" class="tile">
+                            <div class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="item active text-center">
+                                        <div>
+                                            <span class="@ViewBag.VLogo3"></span>
+                                        </div>
+                                        <div class="icontext">
+                                            <a href="/Home/Inventory" class="icontext">@ViewBag.VMenuName3</a>
+                                        </div>
+                                        <div class="icontext">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        <div class="row ">
+            @* Menu - Administrative Menu  MenuSeq - 004*@
+            @if (ViewBag.VMenuName4 != null && ViewBag.VMenuName4 != "" && ViewBag.VStatus4 == "Active")
+            {
+                <div class="col-sm-4 col-xs-8">
+                    <div id="tile_4" class="tile">
+                        <div class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="item active text-center">
+                                    <div>
+                                        <span class="@ViewBag.VLogo4"></span>
+                                    </div>
+                                    <div class="icontext">
+                                        <a href="/Home/QAShipping" class="icontext">@ViewBag.VMenuName4</a>
+                                    </div>
+                                    <div class="icontext">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+            @* Menu - Reports Menu  MenuSeq - 005*@
+            @if (ViewBag.VMenuName5 != null && ViewBag.VMenuName5 != "" && ViewBag.VStatus5 == "Active")
+            {
+                <div class="col-sm-2 col-xs-4">
+                    <div id="tile_5" class="tile">
+                        <div class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="item active text-center">
+                                    <div>
+                                        <span class="@ViewBag.VLogo5"></span>
+                                    </div>
+                                    <div class="icontext">
+                                        <a href="/Home/Maintenance" class="icontext">@ViewBag.VMenuName5</a>
+                                    </div>
+                                    <div class="icontext">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @* Menu - Dashboard Menu  MenuSeq - 006*@
+            @if (ViewBag.VMenuName6 != null && ViewBag.VMenuName6 != "" && ViewBag.VStatus6 == "Active")
+            {
+                <div class="col-sm-2 col-xs-4">
+                    <div id="tile_6" class="tile">
+                        <div class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="item active text-center">
+                                    <div>
+                                        <span class="@ViewBag.VLogo6"></span>
+                                    </div>
+                                    <div class="icontext">
+                                        <a href="/Home/Administrative" class="icontext">@ViewBag.VMenuName6</a>
+                                    </div>
+                                    <div class="icontext">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+
+            @if (ViewBag.VMenuName7 != null && ViewBag.VMenuName7 != "" && ViewBag.VStatus7 == "Active")
+            {
+                <div class="col-sm-2 col-xs-4">
+                    <div id="tile_7" class="tile">
+                        <div class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="item active text-center">
+                                    <div>
+                                        <span class="@ViewBag.VLogo7"></span>
+                                    </div>
+                                    <div class="icontext">
+                                        <a href="/Home/Dashboard" class="icontext">@ViewBag.VMenuName7</a>
+                                    </div>
+                                    <div class="icontext">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="row ">
+                @if (ViewBag.VMenuName8 != null && ViewBag.VMenuName8 != "" && ViewBag.VStatus8 == "Active")
+            {
+                    <div class="col-sm-2 col-xs-4">
+                        <div id="tile_8" class="tile">
+                            <div class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="item active text-center">
+                                        <div>
+                                            <span class="@ViewBag.VLogo8"></span>
+                                        </div>
+                                        <div class="icontext">
+                                            <a href="/Home/Inquiry" class="icontext">@ViewBag.VMenuName8</a>
+                                        </div>
+                                        <div class="icontext">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (ViewBag.VMenuName9 != null && ViewBag.VMenuName9 != "" && ViewBag.VStatus9 == "Active")
+            {
+                    <div class="col-sm-2 col-xs-4">
+                        <div id="tile_9" class="tile">
+                            <div class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="item active text-center">
+                                        <div>
+                                            <span class="@ViewBag.VLogo9"></span>
+                                        </div>
+                                        <div class="icontext">
+                                            @ViewBag.VMenuName9
+                                        </div>
+                                        <div class="icontext">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (ViewBag.VMenuName10 != null && ViewBag.VMenuName10 != "" && ViewBag.VStatus10 == "Active")
+            {
+                <div class="col-sm-2 col-xs-4">
+                    <div id="tile_10" class="tile">
+                        <div class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="item active text-center">
+                                    <div>
+                                        <span class="@ViewBag.VLogo10"></span>
+                                    </div>
+                                    <div class="icontext">
+                                        Menu-4
+                                    </div>
+                                    <div class="icontext">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+
+
+
+    </div>
+
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            jQuery('.footable').footable();
+
+        });
+
+    </script>
+    <script src="~/Scripts/View/Home_Index.js"></script>
+}
+
+
+ @*#tile_logo {
+        background: #ff6a00;
+    }*@
+
