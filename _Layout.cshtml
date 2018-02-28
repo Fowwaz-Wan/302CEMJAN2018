@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+    <link href="~/dist/css/AdminLTE.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" /> 
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <link href="~/Content/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/fixedHeader.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href="~/Content/jqueryui/jquery-ui.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-header">              
+                <div style="margin:16px 0px 0px 50px; color:yellow; font:5px">
+               
+                    @Html.Label((string)@ViewBag.VMainMenu)
+                </div>
+                   
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse" >            
+                <ul class="nav navbar-nav navbar-left" style="margin-left:150px" id="MainMenu">                
+                </ul>                     
+                <ul class="nav navbar-nav navbar-right" style="margin-right:50px">
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hiddenf-xs">@Session["username"].ToString()</span>
+                        </a>
+                        <ul class="dropdown-menu">
+
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+
+                                <div class="pull-right">
+                                    <a href="/Home/ChangePassword" class="btn btn-default btn-flat">Change Password</a>
+                                    <a href="/" class="btn btn-default btn-flat">Sign out</a>&nbsp;&nbsp;
+                                </div>
+                            </li>
+                        </ul>
+                    </li>                    
+                    <li>@Html.ActionLink("Main", "Index1", "Home")</li>
+                </ul>
+               </div>
+        
+
+    </div>
+
+    <div>
+            
+            @RenderBody()
+        <div class="modal modal-warning fade" id="modalWait" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p id="txtWait"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <div class="modal modal-success fade" id="modalSuccess" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p id="txtSuccess"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <div class="modal modal-danger fade" id="modalError" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p id="txtError"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+            @*<hr />*@
+
+    </div>
+
+    <script src="~/Scripts/jquery-1.12.4.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/respond.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Content/jquery.dataTables.min.js"></script>
+    <script src="~/Content/dataTables.fixedColumns.min.js"></script>
+    <script src="~/Content/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Content/dataTables.buttons.min.js"></script>
+    <script src="~/Content/buttons.flash.min.js"></script>
+    <script src="~/Content/buttons.html5.min.js"></script>
+    <script src="~/Content/buttons.print.min.js"></script>
+    <script src="~/Content/jszip.min.js"></script>
+    <script src="~/Content/pdfmake.min.js"></script>
+    <script src="~/Content/vfs_fonts.js"></script>
+    <script src="~/Content/buttons.colVis.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @*<script src="~/Content/canvasjs.min.js"></script>
+    <script src="~/Content/exporting.js"></script>
+    <script src="~/Content/highcharts.js"></script>*@
+    <script src="~/Content/Chart.min.js"></script>
+    @RenderSection("scripts", required: false)
+  
+
+
+</body>
+</html>

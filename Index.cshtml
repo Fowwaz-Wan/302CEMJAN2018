@@ -11,7 +11,12 @@
 
 
 <!DOCTYPE html>
-
+<style>
+    body {
+        background-image:url('@ViewBag.VBackground');
+        background-size:cover;
+    }
+</style>
 
 
 <html>
@@ -48,9 +53,7 @@
 
             </div>
 
-            @*<div style="margin:15px 0px 0px 250px; color:yellow; font:5px">
-                @Html.Label((string)@ViewBag.VApplication)
-            </div>*@
+
 
         </div>
 
@@ -132,23 +135,7 @@
                         <h3 class="box-title">Announcements:</h3>
                     </div>
                     <div class="box-body" style="min-height:150px">
-                        @*<h4>
-                            • T_StencilTension latest version - Icon based, Dropdown from LineMaster <br />
 
-                            <br />
-                            • Fixed Location Master, Defect Code <br />
-
-                            <br />
-                            • Controllers <br />
-                            -> HomeController.cs - Added ViewBag.VMenuController <br />
-
-                            <br />
-                            • Views <br />
-                            - Deleted all Delete.cshtml files <br />
-                            - Removed all CreatedBy, UpdatedBy, CreatedDate, UpdatedDate codes <br />
-                            -> Home - Added link path 'ViewBag.VMenuController' <br />
-                            
-                        </h4>*@
                         @Html.TextAreaFor(model => model.ControlValue, new { style = "min-height: 120px; font-size: 18px;", @class = "form-control", @readonly = true })
                     </div>
                 </div>
@@ -191,73 +178,11 @@
             </div>
         </div>
 
-        @*<div class="row">
-                <div style="margin-left:50px; font-size:15px; font-weight:bold; color:white; float:left;  height:0px; margin-bottom:55px; padding-bottom:0px; position:fixed; bottom:10px; left:0;">Sponsored By</div>
-                <div style="margin-right:95px; font-size:15px; font-weight:bold; color:white; float:right;  height:0px; margin-bottom:45px; padding-bottom:0px; position:fixed; bottom:10px; right:0;"> @ViewBag.VCompanyDesc </div>
 
-
-            </div>
-            <div class="row">
-                <div style="margin-left:70px; font-size:20px; font-weight:bold; color:yellow; float:left;  height:0px; margin-bottom:30px; padding-bottom:0px; position:fixed; bottom:10px; left:0;">@ViewBag.VSponsor </div>
-               <div style="margin-right:70px; font-size:15px; font-weight:bold; color:yellow; float:right;  height:0px; margin-bottom:25px; padding-bottom:0px; position:fixed; bottom:10px; right:0;">&copy;  @ViewBag.VCopyRight </div>
-
-
-            </div>*@
 
     </div>
 
-    @*<script type="text/javascript">
-        $('#txtPassword').keypress(function (event) {
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if (keycode == '13') {
-                checkLogin();
-            }
-        });
 
-
-        function checkLogin() {
-            $.ajax({
-                type: 'GET',
-                url: '/Home/checkLogin',
-                data: { txtUsername: $('#txtUsername').val(), txtPassword: $('#txtPassword').val() },
-                async: false,
-                success: function (result) {
-                    //console.log(result);
-                    //if (result != "") {
-                    //    window.location.replace("/Transaction");
-                    //}
-                    //else {
-                    //alert('Wrong Password!!! Please try login again.');
-                    if (result = "success")
-                    {
-                        alert("success");
-                        window.location.replace("/Home/Index1");
-                    }
-                    else
-                    {
-                        alert("failed");
-                        $('#modalError').modal('show');
-                        $('#txtPassword').val('');
-                        $('#txtUsername').val('');
-                    }                        
-
-                    }
-                })
-            }
-            
-     
-
-        function getUrlVars() {
-            var vars = [], hash;
-            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-            for (var i = 0; i < hashes.length; i++) {
-                hash = hashes[i].split('=');
-                vars.push(hash[0]);
-                vars[hash[0]] = hash[1];
-            }
-            return vars;
-        }
-    </script>*@
 
 </body>
 </html>
