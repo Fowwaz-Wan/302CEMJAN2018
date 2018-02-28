@@ -1,0 +1,252 @@
+﻿@model IEnumerable<StandardPgm.Models.T_Approval>
+
+<style>
+    body {
+        font-size: 9pt;
+    }
+
+    .form-control {
+        font-size: 9pt;
+        height: 75%;
+    }
+</style>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            initDataTable();
+        });
+
+        function initDataTable() {
+            var table = $('#tblTransaction').DataTable({
+                "responsive": true,
+                "scrollY": 350,
+                "scrollX": true,
+                "fixedHeader": false,
+                dom: 'Blfrtip',
+                buttons: [{
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    collectionLayout: 'fixed two-column',
+                    postfixButtons: ['colvisRestore'],
+                }],
+                columnDefs: [{
+                    visible: false
+                }]
+            });
+            var table = $('#tblTransaction').DataTable();
+        }
+
+        function openApproval(id, subject, start, end, week, classroom, time, day, lecturer, subID) {
+            $.ajax({
+                url: "../Admin/ApproveSchedule",
+                data: {
+                    ID: id,
+                    Subject: subject,
+                    Startdate: start,
+                    Enddate: end,
+                    WeekNo: week,
+                    Classroom: classroom,
+                    Time: time,
+                    Day: day,
+                    Lecturer: lecturer,
+                    SubID: subID
+                },
+                type: "GET",
+                async: false,
+                success: function (result) {
+                    $('#modalRequestSuccess').modal('show');
+                    window.location.href = "../Admin/Approval";
+                },
+                error: function (xhr, status, error) {
+
+                }
+            });
+        }
+
+        function openDeny(id, subject, start, end, week, classroom, time, day, lecturer, subID) {
+            $.ajax({
+                url: "../Admin/DenySchedule",
+                data: {
+                    ID: id,
+                    Subject: subject,
+                    Startdate: start,
+                    Enddate: end,
+                    WeekNo: week,
+                    Classroom: classroom,
+                    Time: time,
+                    Day: day,
+                    Lecturer: lecturer,
+                    SubID: subID
+                },
+                type: "GET",
+                async: false,
+                success: function (result) {
+                    $('#modalRequestFail').modal('show');
+                    window.location.href = "../Admin/Approval";
+                },
+                error: function (xhr, status, error) {
+
+                }
+            });
+        }
+    </script>
+}
+
+<title>Pending Approval List</title>
+<br />
+
+<body class="container-fluid">
+    <div class="row">
+        <div class="form-group col-xs-12">
+            <table id="tblTransaction" class="table table-bordered table-hover table-striped" style="min-width:100%">
+                <thead>
+                    <tr bgcolor="#8fabfc">
+                        <th nowrap>
+                            Action
+                        </th>
+                        <th nowrap>
+                            ID
+                        </th>
+                        <th nowrap>
+                            Subject
+                        </th>
+                        <th nowrap>
+                            Start Date
+                        </th>
+                        <th nowrap>
+                            End Date
+                        </th>
+                        <th nowrap>
+                            Week No.
+                        </th>
+                        <th nowrap>
+                            Classroom
+                        </th>
+                        <th nowrap>
+                            Time
+                        </th>
+                        <th nowrap>
+                            Day
+                        </th>
+                        <th nowrap>
+                            Lecturer
+                        </th>
+                        <th nowrap>
+                            Status
+                        </th>
+                        <th nowrap>
+                            Request By
+                        </th>
+                        <th nowrap>
+                            Sub ID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                            <tr>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-primary btn-xs fa fa-edit" 
+                                            onclick="openApproval('@item.ID','@item.Subject','@item.Startdate','@item.Enddate','@item.WeekNo','@item.Classroom','@item.Time',
+                                                                   '@item.Day','@item.Lecturer','@item.SubID')" title="Approve">
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs fa fa-trash" 
+                                            onclick="openDeny('@item.ID', '@item.Subject', '@item.Startdate', '@item.Enddate', '@item.WeekNo', '@item.Classroom', '@item.Time',
+                                                              '@item.Day', '@item.Lecturer', '@item.SubID')" title="Deny">
+                                    </button>
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.Subject)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.Startdate)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.Enddate)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.WeekNo)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.Classroom)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.Time)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.Day)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.Lecturer)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.RequestBy)
+                                </td>
+                                <td nowrap>
+                                    @Html.DisplayFor(modelItem => item.SubID)
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+
+@using (Html.BeginForm())
+{
+    <div class="modal" id="modalRequestSuccess" style="border-radius:3px" hidden>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:green">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:white">Class Replacement Approved!</h4>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-color:green">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+}
+
+@using (Html.BeginForm())
+{
+    <div class="modal" id="modalRequestFail" style="border-radius:3px" hidden>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:red">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:white">Class Replacement Rejected!</h4>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-color:red">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+}

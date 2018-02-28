@@ -1,0 +1,256 @@
+﻿@model StandardPgm.Models.M_User
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<style>
+    body {
+        font-size: 9pt;
+    }
+
+    .form-control {
+        font-size: 9pt;
+        height: 75%;
+    }
+
+    .foo input {
+        height: 31px;
+    }
+
+    .ui-datepicker {
+        background: #dadfe8;
+        border: 1px solid #555;
+        color: #232323;
+    }
+</style>
+
+<script type="text/javascript">
+
+    function UploadAttachment() {
+        //showLoader("Importing Machines from Excel file. Might take a moment depending on data size..");
+
+        if ($("#file_attached").val() == '') {
+            $('#modalErrorNoFile').modal('show');
+        }
+        else {
+
+            var data = new FormData();
+            var files = $("#file_attached").get(0).files;
+
+            // Add the uploaded image content to the form data collection
+            if (files.length > 0) {
+                data.append("UploadedAttached", files[0]);
+                data.append("InsertedById", "Admin");              
+            }
+
+            $('#modalWait').modal('show');
+
+            // Make Ajax request with the contentType = false, and procesDate = false
+            $.ajax({
+                url: "/Admin/UploadAttachment",
+                data: data,
+                type: "POST",
+                async: false,
+                contentType: false,
+                processData: false,
+                success: function (result) {                    
+                    $('#modalWait').modal('hide');
+                    $('#modalUploadSuccess').modal('show');
+                    $('#AttachmentName').val(result);
+                },
+                error: function (xhr, status, error) { $('#modalWait').modal('hide'); $('#modalErrorUpload').modal('show'); }
+            });
+        }
+    }
+</script>
+
+<h2>Edit</h2>
+
+<body class="container-fluid">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4>Basic Information</h4></div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-3 form-group foo">
+                        @Html.LabelFor(model => model.UserID, "User ID*", htmlAttributes: new { @class = "control-label", @style = "color:red" })
+                        @Html.TextBoxFor(model => model.UserID, new { @class = "form-control", @style = "max-width:100%; margin-left:10px", @readonly = "readonly"})
+                    </div>
+
+                    <div class="col-xs-3 form-group foo">
+                        @Html.LabelFor(model => model.UserName, "User Name*", htmlAttributes: new { @class = "control-label", @style = "color:red" })
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @style = "max-width:100%;margin-left:10px" })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-xs-3 form-group foo">
+                        @Html.LabelFor(model => model.IC, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.IC, new { @class = "form-control", @style = "max-width:100%;margin-left:10px" })
+                        @Html.ValidationMessageFor(model => model.IC, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-xs-2 form-group foo">
+                        @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.BirthDate, "{0:dd-MMM-yyyy}", new { @class = "form-control",
+                       @style = "max-width:100%;margin-left:10px"})
+                        @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-2 form-group">
+                        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Gender, new { @class = "form-control", @style = "margin-left:10px;height:31px", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-xs-5 form-group foo">
+                        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @style = "max-width:100%;margin-left:10px" })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-xs-3 form-group foo">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @style = "max-width:100%;margin-left:10px" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="panel-heading"><h4>Phone Number</h4></div>
+            <div class="panel-body">
+
+                <div class="col-xs-15 form-group foo">
+                    @Html.LabelFor(model => model.TelNo_Mobile_,"Telephone No", htmlAttributes: new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.TelNo_Mobile_, new { @class = "form-control", @style = "max-width:100%;margin-left:10px" })
+                    @Html.ValidationMessageFor(model => model.TelNo_Mobile_, "", new { @class = "text-danger" })
+                </div>
+
+
+
+            </div>
+
+            <br />
+            <div class="panel-heading"><h4>Access Information</h4></div>
+            <div class="panel-body">
+
+                <div class="col-xs-15 form-group foo">
+                    @Html.LabelFor(model => model.AccessType, htmlAttributes: new { @class = "control-label", @style = "color:red" })
+                    @Html.DropDownListFor(model => model.AccessType, new SelectList(ViewBag.AccessTypeDropDown as System.Collections.IEnumerable, "Name", "Value"), new { @class = "form-control", @style = "max-width:100%;margin-left:10px;height:31px" })
+                    @Html.ValidationMessageFor(model => model.AccessType, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-xs-15 form-group foo">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label", @style = "color:red" })
+                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @style = "max-width:100%;margin-left:10px", @type="password"})
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <br />
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Save" class="btn btn-success"  />
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-danger" })
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+   $(document).ready(function () {
+         $('#BirthDate').datepicker({
+             dateFormat: "dd-MM-yy",
+             changeMonth: true,
+             changeYear: true,
+             yearRange: "-60:+0"
+         });
+     });
+        </script>
+    }
+</body>
+    <div class="modal modal-warning fade" id="modalWait" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p id="txtWait">Uploading attachment from local drive. Might take a moment depending on data size..</p>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal modal-success fade" id="modalUploadSuccess" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Attachment is successfully uploaded.</p>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal modal-success fade" id="modalSaveSuccess" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Your setting have been saved.</p>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal modal-danger fade" id="modalErrorNoFile" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Please choose file to upload
+                </div>
+            </div>
+            <!-- /.modal-content -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal modal-danger fade" id="modalErrorUpload" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Upload Failed.. Please make sure you already close the file you are uploading.
+                </div>
+            </div>
+            <!-- /.modal-content -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->

@@ -1,188 +1,231 @@
-﻿@model StandardPgm.Models.M_SystemControl
+﻿@model IEnumerable<StandardPgm.Models.M_User>
 
-@{
-    Layout = null;
-}
-
-
-@{
-    ViewBag.Title = "Home Page";
-}
-
-
-<!DOCTYPE html>
 <style>
     body {
-        background-image:url('@ViewBag.VBackground');
-        background-size:cover;
+        font-size: 9pt;
+    }
+
+    .form-control {
+        font-size: 9pt;
+        height: 75%;
     }
 </style>
 
+@section scripts{
+@Scripts.Render("~/bundles/jqueryal")
+<script type="text/javascript">
 
-<html>
+    $(document).ready(function () {
+            $(' #BirthDate').datepicker({
+                dateFormat:"dd-MM-yy",
+                changeMonth: true,
+                changYear: true,
+                yearRange:"-60:+0"
+            });
+            });
+   
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">*@
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-    <!-- Ionicons -->
-    @*<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">*@
-    <link href="~/Content/ionicons.min.css" rel="stylesheet" />
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
-</head>
+        function openDelete(id, name, user) {
+            $('#lblName').html(name);
+            $('#lblID').html(user)
+            $('#txtID').val(id);
+            $('#modalDelete').modal('show');
+        }
 
 
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+        $(document).ready(function () {
 
-        <div class="navbar-header">
+            var table = $('#tblTransaction').DataTable({
+                //"info": false,
+                //"paging": false,
+                "responsive": true,
+                "scrollY": 350,
+                "scrollX": true,
+                "fixedHeader": true,
+                dom: 'Blfrtip',
 
-            <div style="margin-left:50px; width:100%; padding:5px; position:absolute; top:0; z-index:-1000; margin-top:10px">
+                buttons: [
 
-                <img src='@ViewBag.VLogo' style="height:25px;" />
-
-            </div>
-
-
-
-        </div>
-
-
-        <div class="navbar-collapse collapse">
-            <div style="margin-right:150px">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-
-                </ul>
-            </div>
-
-        </div>
-
-    </div>
-    <br /><br /><br />
-    <div class="content">
-        <div class="row">
-
-            <div class="col-md-6 col-md-offset-6 col-xs-12">
-                <div class="pull-right">
-                    <div style="color:yellow">
-                        <h1> @ViewBag.VApplication</h1>
-                        <div style="color:greenyellow">
-                            <h4>@foreach (string line in ViewBag.VApplDesc1)
-                            {
-                                @Html.Label(line)
-                                <br />
-                            }</h4>                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        @*//Login section control*@
-        <div class="row">
-            <div class="col-md-3 col-md-offset-05 col-sm-6 col-xs-12">
-                @using (Html.BeginForm())
-                {
-                    <div class="box" style="border-radius:5px;">
-                        <div class="box-header with-border" style="height:40px">
-                            <h3 class="box-title">Sign in</h3>
-                        </div>
-                        
-                          <div class="box-body" >
-                                
-                                <div class="form-group has-feedback">
-                                    <input class="form-control" placeholder="UserID Or Email" id="txtUsername" name="txtUsername">
-                                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                                </div>
-
-
-                                <div class="form-group has-feedback">
-                                    <input type="password" class="form-control" placeholder="Password" id="txtPassword" name="txtPassword" />
-                                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                                </div>
-
-
-                                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                                <div class="row">
-                                    <br/>
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger blink_text" })
-                                </div>
-                            
-                            </div>
-                    </div>
-
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
                 }
-                </div>
-            </div>
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+            }
+            },
 
-        <br /><br /><br />
-        <div class="row">
-            <div class="col-md-6 col-md-offset-05 col-xs-12">
-                <div class="box" style="border-radius:5px;">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Announcements:</h3>
-                    </div>
-                    <div class="box-body" style="min-height:150px">
+            {
+                extend: 'colvis',
+                collectionLayout: 'fixed two-column',
+                postfixButtons: ['colvisRestore'],
 
-                        @Html.TextAreaFor(model => model.ControlValue, new { style = "min-height: 120px; font-size: 18px;", @class = "form-control", @readonly = true })
-                    </div>
-                </div>
-            </div>
-        </div>
+            },
 
-        <div class="modal fade" id="modalError" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
+
+
+                ],
+
+                columnDefs: [ {
+
+                visible: false
+                },
+
+                ]
+
+            });
+
+            var table = $('#tblTransaction').DataTable();
+
+        });
+
+    </script>
+}
+
+
+
+
+<br/>
+
+<title>Admin List</title>
+
+<div class="form-group col-xs-12">
+            <table id="tblTransaction" class="table table-bordered table-hover table-striped" style="min-width:100%">
+            <thead>
+                <tr>
+                    <td colspan="3" >
+                        <a href="/Admin/Create" class="btn btn-success btn-xs" title="Add">
+                            <div class="fa fa-plus">
+                            </div>
+                        </a>
+                     </td>
+                </tr>
+                <tr bgcolor="#8fabfc">
+                    <th nowrap>
+                        Action
+                    </th>
+                    <th nowrap>
+                        @Html.DisplayNameFor(model => model.UserID)
+                    </th>
+                    <th nowrap>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th nowrap>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th nowrap>
+                        @Html.DisplayNameFor(model => model.AccessType)
+                    </th>
+                    <th nowrap>
+                        @Html.DisplayNameFor(model => model.IC)
+                    </th>
+                    <th nowrap>
+                        Telephone No
+                    </th>
+                    <th nowrap>
+                        @Html.DisplayNameFor(model => model.BirthDate)
+                    </th>
+                    <th nowrap>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </th>
+
+                    <th nowrap>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>  
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td nowrap>
+                        <a href="/Admin/Edit/@item.ID" class="btn btn-success btn-xs" title="Edit">
+                            <div class="fa fa-edit">
+                            </div>
+                        </a>
+
+                        <button type="button" class="btn btn-xs btn-danger fa fa-trash" onclick="openDelete('@item.ID','@item.UserName','@item.UserID')" title="Delete">
+                        </button>
+
+                    </td>
+                    <td nowrap>
+                        @Html.DisplayFor(modelItem => item.UserID)
+                    </td>
+                    <td nowrap>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td nowrap>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+
+                    <td nowrap>
+                        @Html.DisplayFor(modelItem => item.AccessType)
+                    </td>
+                    <td nowrap>
+                        @Html.DisplayFor(modelItem => item.IC)
+                    </td>
+                    <td nowrap>
+                        @Html.DisplayFor(modelItem => item.TelNo_Mobile_)
+                    </td>
+
+                    <td nowrap>
+
+                        @Convert.ToString(string.Format("{0:dd-MM-yyyy}", item.BirthDate))
+                    </td>
+                    <td nowrap>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td nowrap>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>    
+                </tr>
+            }
+        </tbody>
+        </table>
+
+    @using (Html.BeginForm())
+    {
+        <div class="modal" id="modalDelete" style="border-radius:3px">
+            <div class="modal-dialog" >
                 <div class="modal-content">
+                    <div class="modal-header" style="background-color:red">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" style="color:white">Delete item</h4>
+                    </div>
                     <div class="modal-body">
-                        Invalid User Id or Password !!! Please try again.
+                        Are you sure to delete this item? <br/><br/> 
+                        <div class="row">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label>User ID:</label>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <label type="text" readonly="readonly" style="background-color:#d7d9dd;width:400px
+                        ;padding:3px;border:1px solid;margin-right:2px;border-radius:3px" id="lblID"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label>User Name:</label>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <label type="text" readonly="readonly" style="background-color:#d7d9dd;width:400px
+                        ;padding:3px;border:1px solid;border-radius:3px" id="lblName"></label> 
+                            </div>
+                        </div>
+                         
+                        <input type="text" id="txtID" name="txtID" hidden />
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline" data-dismiss="modal">Ok</button>
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Confirm Delete</button>
                     </div>
-                </div>
-
-            </div>
-            <!-- /.modal-dialog -->
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-
-        <div class="row">
-            <div class="col-md-5 col-md-offset-05 col-xs-6">
-                <span style="font-size:15px;color:white;"><b>Sponsored by</b></span>
-            </div>
-            <div class="col-md-6 col-xs-6">
-                <div class="pull-right">
-                    <span style="font-size:15px;color:white;"><b>@ViewBag.VCompanyDesc</b></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-5 col-md-offset-05 col-xs-6">
-                <span style="font-size:20px;color:yellow;"><b>@ViewBag.VSponsor</b></span>
-            </div>
-            <div class="col-md-6 col-xs-6">
-                <div class="pull-right">
-                    <span style="font-size:15px;color:yellow;"><b>&copy;  @ViewBag.VCopyRight</b></span>
-                </div>
-            </div>
-        </div>
-
-
-
+    }
+        @*</div>*@
     </div>
-
-
-
-</body>
-</html>

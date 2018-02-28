@@ -1,0 +1,208 @@
+﻿@model StandardPgm.Models.Subject
+
+<style>
+    body {
+        font-size: 9pt;
+    }
+
+    .form-control {
+        font-size: 9pt;
+        height: 75%;
+    }
+
+    .foo input {
+        height: 31px;
+    }
+
+    .ui-datepicker {
+        background: #dadfe8;
+        color: #232323;
+    }
+</style>
+
+@section scripts{
+    <script type="text/javascript">
+        function openEdit(){
+            $.ajax({
+                url: "../Subject/CheckSchedule",
+                data: {
+                    ID: $('#ID').val(),
+                    Subject1: $('#Subject1').val(),
+                    Startdate: $('#Startdate').val(),
+                    Enddate: $('#Enddate').val(),
+                    WeekNo: $('#WeekNo').val(),
+                    Classroom: $('#Classroom').val(),
+                    Time: $('#Time').val(),
+                    Day: $('#Day').val(),
+                    Lecturer: $('#Lecturer').val()
+                },
+                type: "GET",
+                async: false,
+                success: function (result) {
+                    if (result == "Request Failed!")
+                    {
+                        $('#modalRequestFail').modal('show');
+                    }
+                    else
+                    {
+                        $('#modalRequestSuccess').modal('show');
+                        window.location.href = "../Subject/English";
+                    }
+                },
+                error: function (xhr, status, error) {
+
+                }
+            });
+        }
+    </script>
+}
+
+<title>Edit English Subject</title>
+
+<body class="container-fluid">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <br />
+        <div class="panel panel-primary">
+            <div class="panel-heading">Edit English Schedule</div>
+            <div class="panel-body">
+                <div class="form-horizontal form-group-sm">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Subject1, "Subject:", htmlAttributes: new { @class = "control-label col-md-5"})
+                                <div class="col-md-7">
+                                    @Html.TextBoxFor(model => model.Subject1, new { @class = "form-control", @style = "max-width:100%", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.Subject1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Classroom, "Class Room:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.Classroom, new SelectList(ViewBag.ClassroomList as System.Collections.IEnumerable, "Name", "Value"), htmlAttributes: new { @class = "form-control", @style = " max-width:100%" })
+                                    @Html.ValidationMessageFor(model => model.Classroom, "", new { @class = "text-danger blink_text" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.WeekNo, "Week No:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.WeekNo, new SelectList(ViewBag.WeekNoList as System.Collections.IEnumerable, "Name", "Value"), htmlAttributes: new { @class = "form-control", @style = "max-width:100%" })
+                                    @Html.ValidationMessageFor(model => model.WeekNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Time, "Time:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.Time, new SelectList(ViewBag.ScheduleTimeList as System.Collections.IEnumerable, "Name", "Value"), htmlAttributes: new { @class = "form-control", @style = "max-width:100%" })
+                                    @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger blink_text" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Day, "Day:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.Day, new SelectList(ViewBag.DayList as System.Collections.IEnumerable, "Name", "Value"), htmlAttributes: new { @class = "form-control", @style = "max-width:100%" })
+                                    @Html.ValidationMessageFor(model => model.Day, "", new { @class = "text-danger blink_text" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Lecturer, "Lecturer:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    @Html.TextBoxFor(model => model.Lecturer, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Lecturer, "", new { @class = "text-danger blink_text" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Startdate, "Start Date:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                   @Html.TextBoxFor(model => model.Startdate, new { @class = "form-control", @readonly="readonly" })
+                                    @Html.ValidationMessageFor(model => model.Startdate, "", new { @class = "text-danger blink_text" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Enddate, "End Date:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    @Html.TextBoxFor(model => model.Enddate, new { @class = "form-control", @readonly="readonly" })
+                                    @Html.ValidationMessageFor(model => model.Enddate, "", new { @class = "text-danger blink_text" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="display:none">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ID, "ID:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-7">
+                                    @Html.TextBoxFor(model => model.ID, new { @class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger blink_text" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-11">
+                <input value="Request" class="btn btn-success" type="button" onclick="openEdit()" />
+            </div>
+        </div>
+    }
+    <div>
+        @Html.ActionLink("Back to List", "BackToListEnglish", new { }, new { @class = "btn btn-danger" })
+    </div>
+</body>
+
+@using (Html.BeginForm())
+{
+    <div class="modal" id="modalRequestSuccess" style="border-radius:3px" hidden>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:green">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:white">Request Successfully Submitted</h4>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-color:green">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+}
+
+@using (Html.BeginForm())
+{
+    <div class="modal" id="modalRequestFail" style="border-radius:3px" hidden>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:red">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:white">Request Failed</h4>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-color:red">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+}

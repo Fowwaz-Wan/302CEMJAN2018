@@ -1,0 +1,126 @@
+﻿@model IEnumerable<StandardPgm.Models.Subject>
+
+<style>
+    body {
+        font-size: 9pt;
+    }
+
+    .form-control {
+        font-size: 9pt;
+        height: 75%;
+    }
+</style>
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            initDataTable();
+        });
+
+        function initDataTable() {
+            var table = $('#tblTransaction').DataTable({
+                "responsive": true,
+                "scrollY": 350,
+                "scrollX": true,
+                "fixedHeader": false,
+                dom: 'Blfrtip',
+                buttons: [{
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    collectionLayout: 'fixed two-column',
+                    postfixButtons: ['colvisRestore'],
+                }],
+                columnDefs: [{
+                    visible: false
+                }]
+            });
+
+            var table = $('#tblTransaction').DataTable();
+        }
+    </script>
+}
+
+<title>English Subject</title>
+
+<br />
+
+<body class="container-fluid">
+    <div class="row">
+        <div class="form-group col-xs-12">
+            <table id="tblTransaction" class="table table-bordered table-hover table-striped" style="min-width:100%">
+                <thead>
+                    <tr bgcolor="#8fabfc">
+                        <th nowrap>
+                            Action
+                        </th>
+                        <th nowrap>
+                            ID
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.Subject1)
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.Classroom)
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.WeekNo)
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.Time)
+                        </th>
+                        <th nowrap>
+                            @Html.DisplayNameFor(model => model.Day)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                            <tr>
+                                <td nowrap>
+                                    <a href="/Subject/EnglishEdit?id=@item.ID" class="btn btn-primary btn-xs" title="Edit">
+                                        <div class="fa fa-edit">
+                                        </div>
+                                    </a>
+                                </td>
+                                <th nowrap>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </th>
+                                <th nowrap>
+                                    @Html.DisplayFor(modelItem => item.Subject1)
+                                </th>
+                                <th nowrap>
+                                    @Html.DisplayFor(modelItem => item.Classroom)
+                                </th>
+                                <th nowrap>
+                                    @Html.DisplayFor(modelItem => item.WeekNo)
+                                </th>
+                                <th nowrap>
+                                    @Html.DisplayFor(modelItem => item.Time)
+                                </th>
+                                <th nowrap>
+                                    @Html.DisplayFor(modelItem => item.Day)
+                                </th>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
