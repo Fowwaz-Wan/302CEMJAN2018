@@ -1,0 +1,35 @@
+USE [BCM_MESDB2]
+GO
+
+/****** Object:  Table [dbo].[Subject]    Script Date: 28/2/2018 12:05:04 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Subject](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Subject] [varchar](50) NULL,
+	[Startdate] [varchar](50) NULL,
+	[Enddate] [varchar](50) NULL,
+	[WeekNo] [varchar](50) NULL,
+	[Classroom] [varchar](50) NULL,
+	[Time] [varchar](50) NULL,
+	[Day] [varchar](50) NULL,
+	[Lecturer] [varchar](50) NULL,
+ CONSTRAINT [PK_Subject] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
